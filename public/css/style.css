@@ -1,0 +1,247 @@
+:root {
+  --primary-color: #005a9e;
+  --secondary-color: #00aaff;
+  --bg-color: #f4f7fa;
+  --card-bg: #ffffff;
+  --text-color: #333;
+  --text-light: #666;
+  --border-color: #dde3e8;
+  --font-family: "Noto Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, sans-serif;
+  --success-color: #28a745;
+  --danger-color: #dc3545;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+header {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 1.5rem 2rem;
+  text-align: center;
+}
+header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+header p {
+  margin: 0;
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+main {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  background: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2rem;
+}
+.control-group {
+  display: flex;
+  flex-direction: column;
+}
+.control-group label {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-light);
+  margin-bottom: 0.5rem;
+}
+.control-group select {
+  font-size: 1.1rem;
+  padding: 0.75rem;
+  border: 2px solid var(--border-color);
+  border-radius: 6px;
+  font-family: var(--font-family);
+}
+.lang-buttons button {
+  font-size: 1.1rem;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--border-color);
+  background: none;
+  cursor: pointer;
+  font-family: var(--font-family);
+}
+.lang-buttons button:first-child {
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+.lang-buttons button:last-child {
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  border-left: none;
+}
+.lang-buttons button.active {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+#dashboard {
+  position: relative;
+}
+#district-title {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--primary-color);
+}
+.subtitle {
+  font-size: 1.1rem;
+  color: var(--text-light);
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+
+.speak-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #fff;
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.speak-button:hover {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+.card {
+  background: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-top: 4px solid var(--secondary-color);
+}
+.card h3 {
+  font-size: 1.1rem;
+  margin: 0 0 1rem 0;
+  color: var(--text-light);
+}
+.card .card-value {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin: 0 0 0.5rem 0;
+}
+.card .card-comparison {
+  font-size: 0.9rem;
+  margin: 0;
+}
+.card .card-comparison.positive {
+  color: var(--success-color);
+}
+.card .card-comparison.negative {
+  color: var(--danger-color);
+}
+
+.chart-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.chart-wrapper {
+  background: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+.chart-wrapper-small {
+  max-height: 400px;
+}
+.chart-container h3 {
+  text-align: center;
+  margin-top: 0;
+  font-size: 1.2rem;
+}
+
+@media (max-width: 900px) {
+  .chart-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.hidden {
+  display: none;
+}
+.initial-message {
+  text-align: center;
+  font-size: 1.2rem;
+  color: var(--text-light);
+  margin-top: 4rem;
+}
+
+#loading {
+  border: 5px solid var(--bg-color);
+  border-top: 5px solid var(--primary-color);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin: 4rem auto;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 600px) {
+  main {
+    margin: 1rem auto;
+  }
+  .controls {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  #district-title {
+    font-size: 2rem;
+  }
+  .speak-button {
+    position: static;
+    margin-bottom: 1rem;
+    width: 100%;
+  }
+  .card-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.geo-status {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  text-align: left;
+  margin-top: 0.5rem;
+  height: 1.2em;
+}

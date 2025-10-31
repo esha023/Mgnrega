@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title
+      data-en="MGNREGA District Performance"
+      data-hi="मनरेगा जिला प्रदर्शन"
+    >
+      MGNREGA District Performance
+    </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1
+        data-en="MGNREGA Performance Dashboard"
+        data-hi="मनरेगा प्रदर्शन डैशबोर्ड"
+      >
+        MGNREGA Performance Dashboard
+      </h1>
+      <p data-en="Maharashtra" data-hi="महाराष्ट्र">Maharashtra</p>
+    </header>
+
+    <main>
+      <section class="controls">
+        <div class="control-group">
+          <label for="lang-toggle" data-en="Language" data-hi="भाषा"
+            >Language</label
+          >
+          <div class="lang-buttons">
+            <button id="lang-en" class="active">English</button>
+            <button id="lang-hi">हिन्दी</button>
+          </div>
+        </div>
+        <div class="control-group">
+          <label
+            for="district-select"
+            data-en="Select Your District"
+            data-hi="अपना जिला चुनें"
+          >
+            Select Your District
+          </label>
+          <select id="district-select">
+            <option
+              value=""
+              data-en="-- Please Select --"
+              data-hi="-- कृपया चुनें --"
+            >
+              -- Please Select --
+            </option>
+
+            <% districts.forEach(district => { %>
+            <option
+              value="<%= district.en %>"
+              data-en="<%= district.en %>"
+              data-hi="<%= district.hi %>"
+            >
+              <%= district.en %>
+            </option>
+            <% }); %>
+          </select>
+
+          <p id="geo-status" class="geo-status"></p>
+        </div>
+      </section>
+
+      <div id="dashboard" class="hidden">
+        <button
+          id="speak-button"
+          class="speak-button"
+          title="Read summary aloud"
+        >
+          🔊 <span data-en="Read Aloud" data-hi="जोर से पढ़ें">Read Aloud</span>
+        </button>
+
+        <h2 id="district-title"></h2>
+        <p
+          class="subtitle"
+          data-en="Latest data available"
+          data-hi="नवीनतम डेटा उपलब्ध है"
+        ></p>
+
+        <section class="card-container">
+          <div class="card">
+            <h3 data-en="Households Employed" data-hi="नियोजित परिवार">
+              Households Employed
+            </h3>
+            <p id="card-households" class="card-value">---</p>
+            <p id="card-households-comp" class="card-comparison"></p>
+          </div>
+          <div class="card">
+            <h3
+              data-en="Avg. Days per Household"
+              data-hi="प्रति परिवार औसत दिन"
+            >
+              Avg. Days per Household
+            </h3>
+            <p id="card-avg-days" class="card-value">---</p>
+            <p id="card-avg-days-comp" class="card-comparison"></p>
+          </div>
+          <div class="card">
+            <h3 data-en="Women Persondays" data-hi="महिला व्यक्ति-दिवस">
+              Women Persondays
+            </h3>
+            <p id="card-women-days" class="card-value">---</p>
+            <p id="card-women-days-comp" class="card-comparison"></p>
+          </div>
+          <div class="card">
+            <h3 data-en="Timely Payments" data-hi="समय पर भुगतान">
+              Timely Payments
+            </h3>
+            <p id="card-timely-payments" class="card-value">---</p>
+            <p id="card-timely-payments-comp" class="card-comparison"></p>
+          </div>
+        </section>
+
+        <section class="chart-container">
+          <div class="chart-wrapper">
+            <h3
+              data-en="Individuals Worked (Last 12 Months)"
+              data-hi="काम करने वाले व्यक्ति (पिछले 12 महीने)"
+            >
+              Individuals Worked (Last 12 Months)
+            </h3>
+            <canvas id="line-chart"></canvas>
+          </div>
+          <div class="chart-wrapper">
+            <h3
+              data-en="Persondays by Group (Latest)"
+              data-hi="समूह द्वारा व्यक्ति-दिवस (नवीनतम)"
+            >
+              Persondays by Group (Latest)
+            </h3>
+            <canvas id="bar-chart"></canvas>
+          </div>
+          <div class="chart-wrapper chart-wrapper-small">
+            <h3
+              data-en="100-Day Completion (Latest)"
+              data-hi="100-दिन की समाप्ति (नवीनतम)"
+            >
+              100-Day Completion (Latest)
+            </h3>
+            <canvas id="doughnut-chart"></canvas>
+          </div>
+        </section>
+      </div>
+
+      <div id="loading" class="hidden"></div>
+      <p
+        id="initial-message"
+        class="initial-message"
+        data-en="Please select a district to see the data."
+        data-hi="डेटा देखने के लिए कृपया एक जिला चुनें।"
+      >
+        Please select a district to see the data.
+      </p>
+    </main>
+
+    <script src="/js/main.js"></script>
+  </body>
+</html>
