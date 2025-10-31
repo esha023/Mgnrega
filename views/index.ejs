@@ -32,13 +32,64 @@
     <main>
       <section class="controls">
         <div class="control-group">
-          <label for="lang-toggle" data-en="Language" data-hi="भाषा"
-            >Language</label
-          >
+          <label for="lang-toggle" data-en="Language" data-hi="भाषा">
+            Language
+          </label>
           <div class="lang-buttons">
             <button id="lang-en" class="active">English</button>
             <button id="lang-hi">हिन्दी</button>
           </div>
+        </div>
+
+        <div class="dropdown-wrapper">
+          <div class="control-group">
+            <label
+              for="district-select"
+              data-en="Select Your District"
+              data-hi="अपना जिला चुनें"
+            >
+              Select Your District
+            </label>
+            <select id="district-select">
+              <option
+                value=""
+                data-en="-- Please Select --"
+                data-hi="-- कृपया चुनें --"
+              >
+                -- Please Select --
+              </option>
+              <% districts.forEach(district => { %>
+              <option
+                value="<%= district.en %>"
+                data-en="<%= district.en %>"
+                data-hi="<%= district.hi %>"
+              >
+                <%= district.en %>
+              </option>
+              <% }); %>
+            </select>
+            <p id="geo-status" class="geo-status"></p>
+          </div>
+
+          <div class="control-group" id="fin-year-controls">
+            <label
+              for="fin-year-select"
+              data-en="Select Financial Year"
+              data-hi="वित्तीय वर्ष चुनें"
+            >
+              Select Financial Year
+            </label>
+            <select id="fin-year-select"></select>
+          </div>
+        </div>
+      </section>
+      <!-- <section class="controls">
+        <label for="lang-toggle" data-en="Language" data-hi="भाषा"
+          >Language</label
+        >
+        <div class="lang-buttons">
+          <button id="lang-en" class="active">English</button>
+          <button id="lang-hi">हिन्दी</button>
         </div>
         <div class="control-group">
           <label
@@ -69,8 +120,19 @@
           </select>
 
           <p id="geo-status" class="geo-status"></p>
+
+          <div class="control-group" id="fin-year-controls">
+            <label
+              for="fin-year-select"
+              data-en="Select Financial Year"
+              data-hi="वित्तीय वर्ष चुनें"
+            >
+              Select Financial Year
+            </label>
+            <select id="fin-year-select"></select>
+          </div>
         </div>
-      </section>
+      </section> -->
 
       <div id="dashboard" class="hidden">
         <button
@@ -107,11 +169,24 @@
             <p id="card-avg-days-comp" class="card-comparison"></p>
           </div>
           <div class="card">
-            <h3 data-en="Women Persondays" data-hi="महिला व्यक्ति-दिवस">
-              Women Persondays
+            <h3
+              data-en="Total Wages Paid (in ₹ Lakhs)"
+              data-hi="कुल भुगतान की (लाख रुपये में)"
+            >
+              Total Wages Paid (in ₹ Lakhs)
             </h3>
-            <p id="card-women-days" class="card-value">---</p>
-            <p id="card-women-days-comp" class="card-comparison"></p>
+            <p id="card-wages-paid" class="card-value">---</p>
+            <p id="card-wages-paid-comp" class="card-comparison"></p>
+          </div>
+          <div class="card">
+            <h3
+              data-en="Total Individuals Worked"
+              data-hi="कुल कार्यरत व्यक्ति"
+            >
+              Total Individuals Worked
+            </h3>
+            <p id="card-individuals-worked" class="card-value">---</p>
+            <p id="card-individuals-worked-comp" class="card-comparison"></p>
           </div>
           <div class="card">
             <h3 data-en="Timely Payments" data-hi="समय पर भुगतान">
@@ -122,16 +197,16 @@
           </div>
         </section>
 
+        <div class="chart-wrapper">
+          <h3
+            data-en="Individuals Worked (Last 12 Months)"
+            data-hi="काम करने वाले व्यक्ति (पिछले 12 महीने)"
+          >
+            Individuals Worked (Last 12 Months)
+          </h3>
+          <canvas id="line-chart"></canvas>
+        </div>
         <section class="chart-container">
-          <div class="chart-wrapper">
-            <h3
-              data-en="Individuals Worked (Last 12 Months)"
-              data-hi="काम करने वाले व्यक्ति (पिछले 12 महीने)"
-            >
-              Individuals Worked (Last 12 Months)
-            </h3>
-            <canvas id="line-chart"></canvas>
-          </div>
           <div class="chart-wrapper">
             <h3
               data-en="Persondays by Group (Latest)"
@@ -141,7 +216,7 @@
             </h3>
             <canvas id="bar-chart"></canvas>
           </div>
-          <div class="chart-wrapper chart-wrapper-small">
+          <div class="chart-wrapper">
             <h3
               data-en="100-Day Completion (Latest)"
               data-hi="100-दिन की समाप्ति (नवीनतम)"
