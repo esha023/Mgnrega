@@ -6,7 +6,7 @@ const districtSelect = document.getElementById("district-select");
 const dashboard = document.getElementById("dashboard");
 const loading = document.getElementById("loading");
 const initialMessage = document.getElementById("initial-message");
-const districtTitle = document.getElementById("district-title"); // The H2 title
+const districtTitle = document.getElementById("district-title");
 const districtSubtitle = document.querySelector(".subtitle");
 const geoStatus = document.getElementById("geo-status");
 
@@ -14,8 +14,14 @@ const cardHouseholds = document.getElementById("card-households");
 const cardHouseholdsComp = document.getElementById("card-households-comp");
 const cardAvgDays = document.getElementById("card-avg-days");
 const cardAvgDaysComp = document.getElementById("card-avg-days-comp");
-const cardWomenDays = document.getElementById("card-women-days");
-const cardWomenDaysComp = document.getElementById("card-women-days-comp");
+const cardWagesPaid = document.getElementById("card-wages-paid");
+const cardWagesPaidComp = document.getElementById("card-wages-paid-comp");
+const cardIndividualsWorked = document.getElementById(
+  "card-individuals-worked"
+);
+const cardIndividualsWorkedComp = document.getElementById(
+  "card-individuals-worked-comp"
+);
 const cardTimelyPayments = document.getElementById("card-timely-payments");
 const cardTimelyPaymentsComp = document.getElementById(
   "card-timely-payments-comp"
@@ -112,11 +118,18 @@ function updateUI(records, districtName_EN, districtName_HI) {
     "days"
   );
   updateCard(
-    cardWomenDays,
-    cardWomenDaysComp,
-    latest.women_persondays,
-    previous.women_persondays,
-    "persondays"
+    cardWagesPaid,
+    cardWagesPaidComp,
+    latest.wages_paid,
+    previous.wages_paid,
+    "wages"
+  );
+  updateCard(
+    cardIndividualsWorked,
+    cardIndividualsWorkedComp,
+    latest.total_individuals_worked,
+    previous.total_individuals_worked,
+    "individuals"
   );
   updateCard(
     cardTimelyPayments,
@@ -168,11 +181,44 @@ function updateLineChart(records) {
   if (lineChart) {
     lineChart.destroy();
   }
-  const chartData = records.slice(0, 12).reverse();
+
+  const monthMap = {
+    Jan: 0,
+    Feb: 1,
+    March: 2,
+    April: 3,
+    May: 4,
+    June: 5,
+    July: 6,
+    Aug: 7,
+    Sep: 8,
+    Oct: 9,
+    Nov: 10,
+    Dec: 11,
+  };
+
+  const getSortableDate = (r) => {
+    const monthIndex = monthMap[r.month];
+    const year = parseInt(r.fin_year.slice(0, 4));
+
+    return new Date(year, monthIndex, 1);
+  };
+
+  const sortedRecords = records.sort((a, b) => {
+    return getSortableDate(a) - getSortableDate(b);
+  });
+
+  const chartData = sortedRecords.slice(-12);
+
+  // To get the 12 OLDEST months:
+  // const chartData = sortedRecords.slice(0, 12);
+
+  // 5. Build your chart. DO NOT use .reverse().
   const labels = chartData.map(
     (r) => `${r.month.slice(0, 3)} ${r.fin_year.slice(2, 4)}`
   );
   const data = chartData.map((r) => r.total_individuals_worked);
+
   lineChart = new Chart(document.getElementById("line-chart"), {
     type: "line",
     data: {
@@ -200,11 +246,13 @@ function updateBarChart(latest) {
     latest.sc_persondays,
     latest.st_persondays,
     latest.women_persondays,
+    latest.differently_abled_persondays,
   ];
+  console.log("Bar Chart Data:", data);
   barChart = new Chart(document.getElementById("bar-chart"), {
     type: "bar",
     data: {
-      labels: ["SC", "ST", "Women"],
+      labels: ["SC", "ST", "Women", "Differently Abled"],
       datasets: [
         {
           label: "Persondays",
