@@ -73,66 +73,16 @@
 
           <div class="control-group" id="fin-year-controls">
             <label
-              for="fin-year-select"
+              for="finYearSelect"
               data-en="Select Financial Year"
               data-hi="वित्तीय वर्ष चुनें"
             >
               Select Financial Year
             </label>
-            <select id="fin-year-select"></select>
+            <select id="finYearSelect"></select>
           </div>
         </div>
       </section>
-      <!-- <section class="controls">
-        <label for="lang-toggle" data-en="Language" data-hi="भाषा"
-          >Language</label
-        >
-        <div class="lang-buttons">
-          <button id="lang-en" class="active">English</button>
-          <button id="lang-hi">हिन्दी</button>
-        </div>
-        <div class="control-group">
-          <label
-            for="district-select"
-            data-en="Select Your District"
-            data-hi="अपना जिला चुनें"
-          >
-            Select Your District
-          </label>
-          <select id="district-select">
-            <option
-              value=""
-              data-en="-- Please Select --"
-              data-hi="-- कृपया चुनें --"
-            >
-              -- Please Select --
-            </option>
-
-            <% districts.forEach(district => { %>
-            <option
-              value="<%= district.en %>"
-              data-en="<%= district.en %>"
-              data-hi="<%= district.hi %>"
-            >
-              <%= district.en %>
-            </option>
-            <% }); %>
-          </select>
-
-          <p id="geo-status" class="geo-status"></p>
-
-          <div class="control-group" id="fin-year-controls">
-            <label
-              for="fin-year-select"
-              data-en="Select Financial Year"
-              data-hi="वित्तीय वर्ष चुनें"
-            >
-              Select Financial Year
-            </label>
-            <select id="fin-year-select"></select>
-          </div>
-        </div>
-      </section> -->
 
       <div id="dashboard" class="hidden">
         <button
